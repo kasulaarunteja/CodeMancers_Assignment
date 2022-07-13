@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Giphy  from './components/Giphy';
+import Post  from './components/Post'
 
 function App() {
   return (
-   <div>
-    <Giphy/>
+   <div className="App">
+    <Post/>
    </div>
   );
 }

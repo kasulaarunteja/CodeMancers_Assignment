@@ -2,49 +2,39 @@
 
 import axios from 'axios';
 import React from 'react';
+import "./Giphy.css"
 import { useState } from 'react';
 
-const Giphy = () => {
+const Giphy = ({Url}) => {
 
-    const [text, setText] = useState("")
-    const [result, setResult] = useState([]);
+    const [text, setText] = useState([])
 
     const handleInput = (e) => {
-        setText(e.target.value)
-    }
-
-    const handleSubmit = (e) => {
-        // if(text.length = 0){
-        //     return
-        // }
-        // console.log(text)
-        const fetchData = async () => {
-            const res = await axios.get("https://api.giphy.com/v1/gifs/search", {
-                params: {
-                    api_key: "y1PGNI7Nk0crrmOxiz5tzRl6zTwFVnJe"
-                }
-            })
-            console.log(res)
-            setResult(res)
+        if (text.length = 0) {
+            return
         }
-        fetchData()
-        setText("")
+        console.log(e.target.value)
+        axios.get(`https://api.giphy.com/v1/gifs/search?api_key=0mBsR1TSdSHiMo1x2g9jGJQcKLpLfTEu&q=${e.target.value}&limit=25&offset=0&rating=g&lang=en`).then(({ data }) => {
+            console.log(data.data)
+            setText(data.data)
+        }, [])
     }
-
-
 
     return (
-        <div>
-            <h2>giphy</h2>
-            <input type="text" value={text} onChange={handleInput} />
-            <button onClick={handleSubmit}>submit</button>
-            <div>
-                {result.map((e) => {
+        <>
+            <input id="gif-in" type="text" onChange={(e) => { handleInput(e) }} />
+            <div style={{ display: 'grid', gridTemplateColumns: "repeat(3, 100px)", height: "300px" , overflow: "scroll"}}>
+                {text.map((e) => {
 
+                    return (
+                        <img src={e.images.original.url} key={e.id} style={{ width: "100px" }}  onClick={() => {Url(e.images.original.url)}} />
+                    )
                 })}
+
             </div>
-        </div>
-    );
+
+        </>
+    )
 }
 
 export default Giphy;
