@@ -6,8 +6,6 @@ import "./Post.css"
 import Giphy from './Giphy';
 
 
-
-
 export default function Post() {
 
   const [state, setState] = useState(0);
@@ -29,7 +27,7 @@ export default function Post() {
           </div>
         </div>
         <div id="box2">
-          <button> Tag Frd</button>
+          <button>Tag Frd</button>
           <button> check</button>
           <button className="gip-b" onClick={() => { setState(1) }}>Gif</button>
           <button> Tag Even</button>
